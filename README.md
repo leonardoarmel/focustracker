@@ -9,3 +9,6 @@ clear data
 To be implemented:
 
 The actual reward system... I'm working on it don't worry
+
+
+(Code is generated using AI)
