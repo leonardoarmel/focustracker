@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    width: 560px; margin: 0; padding: 12px; font-size: 13px; color: #222;
+  }
+  h2 { margin: 0 0 6px 0; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; color: #555; }
+  section { margin-bottom: 14px; }
+  canvas { display: block; width: 100%; height: 180px; background: #fafafa; border: 1px solid #ddd; border-radius: 4px; }
+  .row { display: flex; gap: 8px; align-items: center; margin-bottom: 6px; }
+  .row label { flex-shrink: 0; min-width: 34px; color: #555; }
+  input[type="time"], input[type="date"], input[type="text"] {
+    padding: 3px 6px; border: 1px solid #ccc; border-radius: 3px; font-size: 12px; font-family: inherit;
+  }
+  .pct { font-size: 20px; font-weight: 600; margin-top: 4px; }
+  .pct .off { color: #d33; }
+  .pct .on  { color: #383; }
+  ul { list-style: none; padding: 0; margin: 6px 0; max-height: 110px; overflow-y: auto; }
+  li {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 3px 6px; background: #f5f5f5; margin-bottom: 3px; border-radius: 3px;
+  }
+  li button { background: none; border: none; color: #a33; cursor: pointer; font-size: 15px; padding: 0 4px; }
+  button { padding: 3px 10px; font-size: 12px; cursor: pointer; }
+  .add { display: flex; gap: 4px; }
+  .add input { flex: 1; }
+  .muted { color: #888; font-size: 11px; margin-top: 4px; }
+  .legend { display: inline-block; width: 10px; height: 10px; border-radius: 2px; vertical-align: middle; margin-right: 3px; }
+</style>
+</head>
+<body>
+  <section>
+    <h2>Today's activity</h2>
+    <canvas id="chart" width="560" height="180"></canvas>
+    <div class="row" style="margin-top:6px">
+      <label>Range</label>
+      <select id="rangeMode">
+        <option value="day">Full day (0–24h)</option>
+        <option value="interval">Zoom to interval</option>
+      </select>
+      <label style="margin-left:8px">Y-max</label>
+      <select id="yScale">
+        <option value="60">60s/min</option>
+        <option value="30">30s/min</option>
+        <option value="15">15s/min</option>
+        <option value="10">10s/min</option>
+        <option value="5">5s/min</option>
+        <option value="auto">auto</option>
+      </select>
+    </div>
+    <div class="muted">
+      <span class="legend" style="background:#e57373"></span>off-task
+      &nbsp;<span class="legend" style="background:#81c784"></span>on-task
+      &nbsp;— seconds per minute.
+    </div>
+  </section>
+
+  <section>
+    <h2>Interval</h2>
+    <div class="row">
+      <label>Date</label>
+      <input type="date" id="date">
+    </div>
+    <div class="row">
+      <label>From</label>
+      <input type="time" id="from" value="00:00">
+      <label>To</label>
+      <input type="time" id="to" value="23:59">
+    </div>
+    <div class="pct">
+      Off: <span class="off" id="pctOff">--%</span>
+      &nbsp;&nbsp;On: <span class="on" id="pctOn">--%</span>
+    </div>
+    <div class="muted" id="totals"></div>
+  </section>
+
+  <section>
+    <h2>Whitelist</h2>
+    <ul id="wl"></ul>
+    <div class="add">
+      <input type="text" id="newDomain" placeholder="e.g. github.com">
+      <button id="addBtn">Add</button>
+    </div>
+    <div class="muted">Matches the domain and its subdomains. Empty whitelist = everything counts as off-task.</div>
+  </section>
+
+  <section>
+    <h2>Data</h2>
+    <button id="resetBtn">Reset tracked data</button>
+    <div class="muted">Deletes all recorded on/off history. Whitelist is kept.</div>
+  </section>
+
+<script src="popup.js"></script>
+</body>
+</html>

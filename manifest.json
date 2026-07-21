@@ -1,0 +1,21 @@
+{
+  "manifest_version": 3,
+  "name": "Focus Tracker",
+  "version": "1.0",
+  "description": "Tracks time spent off a whitelist of sites (or in a different active window) and shows a per-day breakdown.",
+  "permissions": ["tabs", "storage", "alarms"],
+  "host_permissions": ["<all_urls>"],
+  "background": {
+    "scripts": ["background.js"]
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Focus Tracker"
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "focus-tracker@example.local",
+      "strict_min_version": "115.0"
+    }
+  }
+}
