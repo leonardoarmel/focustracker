@@ -3,3 +3,9 @@ Focustracker is a simple Firefox extension that helps you stay focused by record
 Currently implemented features:
 
 Chart that shows time display of on/off task
+"Work" websites list
+clear data
+
+To be implemented:
+
+The actual reward system... I'm working on it don't worry
